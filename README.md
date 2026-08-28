@@ -52,7 +52,7 @@ To measure price variations across different time horizons, three key inflation 
 
 ## Dashboard
 
-* 🔗 *[Link to interactive Power BI report]*
+* 🔗 *[https://app.powerbi.com/view?r=eyJrIjoiMDg1YjJmY2UtMDViZS00NGJlLWEzNDEtMDZkMGY5OTJjZmYyIiwidCI6IjY5M2NiZWEwLTRlZjktNDI1NC04OTc3LTc2ZTA1Y2I1ZjU1NiIsImMiOjR9]*
 
 ## Limitations
 
