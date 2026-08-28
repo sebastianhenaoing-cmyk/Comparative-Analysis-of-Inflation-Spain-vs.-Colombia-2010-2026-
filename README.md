@@ -16,43 +16,55 @@ An exploratory analysis comparing consumer price index (CPI) and accumulated inf
 ## Methodology
 
 ### Data Cleaning & Modeling (Power Query & DAX)
+
 * Filtered raw data to isolate overall CPI indicators (`CP0` / `CP00` expenditure divisions) from granular sub-categories to prevent aggregation errors in average calculations.
 * Resolved country-specific locale and date formatting conflicts during source ingestion.
 * Applied a star-schema data architecture: a central fact table (`Fact_Indices`) linked to a dedicated date dimension (`Dim_Calendario`).
 
 ### Standardized Base Year Reindexing (Base 2015)
-* To ensure accurate multi-country comparisons, historical CPI series were re-indexed to a common reference year (**Base 2015 = 100**).
-* **Formula:**  
-  $$\text{Reindexed CPI}_{t} = \left( \frac{\text{Raw CPI}_{t}}{\text{Average CPI}_{2015}} \right) \times 100$$
-* This standardization eliminates baseline discrepancies between INE and DANE datasets, allowing direct comparison of price growth trajectories over time.
+
+To ensure accurate multi-country comparisons, historical CPI series were re-indexed to a common reference year (**Base 2015 = 100**).
+
+**Formula:**
+
+$$\text{Reindexed CPI}_{t} = \left( \frac{\text{Raw CPI}_{t}}{\text{Average CPI}_{2015}} \right) \times 100$$
+
+This standardization eliminates baseline discrepancies between INE and DANE datasets, allowing direct comparison of price growth trajectories over time.
 
 ### Inflation Calculations & DAX Formulas
+
 To measure price variations across different time horizons, three key inflation indicators were engineered in DAX:
 
-* **1. Accumulated Inflation (Period-to-Date):**  
-  Measures total price percentage change between the target period (e.g., July 2026) and the baseline period (e.g., December 2025).  
-  $$\text{Accumulated Inflation} = \frac{\text{CPI}_{\text{Current Period}} - \text{CPI}_{\text{Baseline Period}}}{\text{CPI}_{\text{Baseline Period}}}$$
+**1. Accumulated Inflation (Period-to-Date)**
 
-* **2. Annual Inflation (YoY):**  
-  Measures year-over-year price change for any given month relative to the same month of the previous year.  
-  $$\text{Annual Inflation (YoY)} = \frac{\text{CPI}_{t} - \text{CPI}_{t-12}}{\text{CPI}_{t-12}}$$
+Measures total price percentage change between the target period (e.g., July 2026) and the baseline period (e.g., December 2025).
 
-* **3. Category-Specific Inflation Rate:**  
-  Calculates the localized price variance within specific COICOP spending divisions (Food, Housing, Transport, etc.) over selected annual windows.
+$$\text{Accumulated Inflation} = \frac{\text{CPI}_{\text{Current Period}} - \text{CPI}_{\text{Baseline Period}}}{\text{CPI}_{\text{Baseline Period}}}$$
+
+**2. Annual Inflation (YoY)**
+
+Measures year-over-year price change for any given month relative to the same month of the previous year.
+
+$$\text{Annual Inflation (YoY)} = \frac{\text{CPI}_{t} - \text{CPI}_{t-12}}{\text{CPI}_{t-12}}$$
+
+**3. Category-Specific Inflation Rate**
+
+Calculates the localized price variance within specific COICOP spending divisions (Food, Housing, Transport, etc.) over selected annual windows.
 
 ### Dashboard & UX Design
+
 * Applied an **Executive Dark Mode** layout featuring brand-aligned color coding (Red for Spain, Gold `#FCD116` for Colombia).
 * Standardized custom multi-card components to display high-level KPIs alongside granular category breakdowns without visual clutter.
 
 ## Key Findings
 
 * **Divergent Cumulative Pressure:** Colombia shows higher cumulative inflation rates compared to Spain over recent comparative intervals (e.g., ~4.94% vs. ~2.58% in the analyzed baseline window).
-* **Historical Trajectory:** While both countries experienced inflationary spikes post-2020, Colombia's baseline index shows a steeper long-term slope compared to Spain’s lower-volatility trend.
+* **Historical Trajectory:** While both countries experienced inflationary spikes post-2020, Colombia's baseline index shows a steeper long-term slope compared to Spain's lower-volatility trend.
 * **Category Drivers:** Expenditure breakdowns reveal that essential goods—such as Housing, Utilities, and Food—serve as the main drivers of price inflation in both markets, though with varying levels of intensity.
 
 ## Dashboard
 
-* 🔗 *[https://app.powerbi.com/view?r=eyJrIjoiMDg1YjJmY2UtMDViZS00NGJlLWEzNDEtMDZkMGY5OTJjZmYyIiwidCI6IjY5M2NiZWEwLTRlZjktNDI1NC04OTc3LTc2ZTA1Y2I1ZjU1NiIsImMiOjR9]*
+🔗 [View interactive dashboard (Power BI)](https://app.powerbi.com/view?r=eyJrIjoiMDg1YjJmY2UtMDViZS00NGJlLWEzNDEtMDZkMGY5OTJjZmYyIiwidCI6IjY5M2NiZWEwLTRlZjktNDI1NC04OTc3LTc2ZTA1Y2I1ZjU1NiIsImMiOjR9)
 
 ## Limitations
 
